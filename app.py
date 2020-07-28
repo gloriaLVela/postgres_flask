@@ -23,9 +23,9 @@ print ("app.config : ", app.config)
 
 # Connect the SQLAlchemy object to the app
 
-db = SQLAlchemy(app)
+# db = SQLAlchemy(app)
 
-# db.init(app)
+db.init(app)
 
 @app.route("/")
 def main():
