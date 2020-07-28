@@ -1,4 +1,5 @@
 from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
 from models import db
 
 app = Flask(__name__)
@@ -8,15 +9,23 @@ app = Flask(__name__)
 POSTGRES = {
     'user': 'postgres',
     'pw': 'password',
-    'db': 'my_database',
+    'db': 'test_db',
     'host': 'localhost',
     'port': '5432'
 
 }
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://%(user)s%(pw)s@%(host)s:%(port)s/%(db)s' % POSTGRES
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://%(user)s:%(pw)s@%(host)s:%(port)s/%(db)s' % POSTGRES
+
+print ("app.config['SQLALCHEMY_DATABASE_URI'] : ", app.config['SQLALCHEMY_DATABASE_URI'])
+
+print ("app.config : ", app.config)
+
 # Connect the SQLAlchemy object to the app
-db.init(app)
+
+db = SQLAlchemy(app)
+
+# db.init(app)
 
 @app.route("/")
 def main():
