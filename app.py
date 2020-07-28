@@ -7,7 +7,7 @@ app = Flask(__name__)
 # Configure Flask by providing the PostgreSQL URI so the app is able to connect to the database
 
 POSTGRES = {
-    'user': 'postgres',
+    'user': 'root',
     'pw': 'password',
     'db': 'test_db',
     'host': 'localhost',
@@ -15,7 +15,7 @@ POSTGRES = {
 
 }
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://%(user)s:%(pw)s@%(host)s:%(port)s/%(db)s' % POSTGRES
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql+psycopg2://%(user)s:%(pw)s@%(host)s:%(port)s/%(db)s' % POSTGRES
 
 print ("app.config['SQLALCHEMY_DATABASE_URI'] : ", app.config['SQLALCHEMY_DATABASE_URI'])
 
@@ -23,9 +23,7 @@ print ("app.config : ", app.config)
 
 # Connect the SQLAlchemy object to the app
 
-# db = SQLAlchemy(app)
-
-db.init(app)
+db.init_app(app)
 
 @app.route("/")
 def main():
